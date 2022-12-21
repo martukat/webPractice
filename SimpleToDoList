@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Marta Muñoz San Román">
+
+    <title>Lista de Tareas</title>
+
+    <style>
+        body {
+            background-color: lightcoral;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        #contenedor {
+            background-color: white;
+            padding: 15px;
+            margin: 15px;
+            border-radius: 15px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #botonTarea {
+            background-color: bisque;
+            padding: 5px;
+            margin: 5px;
+
+            border: 2px solid white;
+        }
+
+        #inputTarea {
+            background: white;
+            padding: 5px;
+            margin: 5px;
+            border: 1px solid gray;
+        }
+
+        #inputTarea:hover {
+            background-color: black;
+            color: white;
+        }
+
+        #botonTarea:hover {
+            background-color: black;
+            color: white;
+        }
+        .delete {
+            float: right;
+            background-color: coral;
+            border: none;
+            color: white;
+            text-align: center;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .cuadroTarea {
+            height: 20px;
+        }
+    </style>
+        <script>
+
+            function addTexto() {
+                /*********************
+                 * AÑADIR TEXTO O "TAREAS"
+                 * ****/
+                var input = document.getElementById("inputTarea").value; // extrae lo que escribe en el cuadro de texto
+                var nodo = document.createElement("div");
+                nodo.setAttribute("class", "cuadroTarea");
+    
+                // edito un poco el estilo de cada div
+                nodo.style.border = "thin solid #F08080";
+                nodo.style.marginTop = "10px";
+                nodo.style.padding = "5px";
+    
+                // aniado boton para ELIMINAR tarea
+                var eliminarBoton = document.createElement("input");
+                eliminarBoton.setAttribute("type", "button");
+                eliminarBoton.setAttribute("class", "delete");
+                eliminarBoton.setAttribute("value", "X");
+    
+                var nodoTexto = document.createTextNode(input);
+                nodo.appendChild(nodoTexto); // "junta" el nodo de parrafo con el input
+                nodo.appendChild(eliminarBoton); // "junta" el nodo con el boton al texto
+                document.getElementById("contenedor").appendChild(nodo); // lo "junta" al div
+    
+                /*********************
+                 * ELIMINAR TEXTO O "TAREAS"
+                 * ****/
+                var current_tasks = document.querySelectorAll(".delete");
+                for (var i = 0; i < current_tasks.length; i++) {
+                    current_tasks[i].onclick = function () {
+                        this.parentNode.remove();
+                    }
+                }
+    
+            } // fin funcion
+    
+        </script>
+    
+        <noscript>
+            <p>Parece que tu navegador no pudo soportar JavaScript...</p>
+        </noscript>
+
+</head>
+
+<body>
+    <div id="contenedor">
+        <h4>Tareas</h4>
+        <input type="text" placeholder="Escribe una tarea..." id="inputTarea">
+        <!-- botón que aniade las tareas-->
+        <button id="botonTarea" type="button" onclick="addTexto()">Añadir</button>
+    </div>
+
+</body>
+
+</html>
